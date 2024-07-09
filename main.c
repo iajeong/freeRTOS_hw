@@ -20,10 +20,12 @@ void vApplicationIdleHook( void )
     usleep( 15000 );
 }
 
+TaskHandle_t xHandle;
+
 // Task 1 정의
-void vTask1( void *pvParameters )
+void vTask2_1( void *pvParameters )
 {
-	const char *pcTaskName = "Task 1: 1 sec period\r\n";
+	const char *pcTaskName = "zzzzzzz\r\n";
 
 	for( ;; )
 	{
@@ -32,14 +34,29 @@ void vTask1( void *pvParameters )
 	}
 }
 // Task 2 정의
-void vTask2( void *pvParameters )
+void vTask2_2( void *pvParameters )
 {
-	const char *pcTaskName = "Task 2: 2 sec period\r\n";
+	const char *pcTaskName = "알람! 알람! 알람!\r\n";
 
 	for( ;; )
 	{
 		console_print( pcTaskName );
-        vTaskDelay( 2000 );
+		vTaskDelay( 5000 );
+        vTaskSuspend( xHandle );
+		//vTaskDelay( 1000 );
+		vTaskResume( xHandle );
+		//vTaskDelay( 1000 );
+	}
+}
+// Task 3 정의
+void vTask2_3( void *pvParameters )
+{
+	const char *pcTaskName = "5분만..\r\n";
+
+	for ( ;; )
+	{
+		console_print( pcTaskName );
+		vTaskDelay( 5000 );
 	}
 }
 
@@ -47,8 +64,10 @@ int main( void )
 {
     console_init(); 
 
-	xTaskCreate( vTask1, "Task 1", configMINIMAL_STACK_SIZE, NULL, 1, NULL );
-	xTaskCreate( vTask2, "Task 2", configMINIMAL_STACK_SIZE, NULL, 1, NULL );
+	/* xTaskCreate(Pointer to the function that implement the task, text name, stack depth, task parameter, task priority, task handle)*/
+	xTaskCreate( vTask2_1, "Task 1", configMINIMAL_STACK_SIZE, NULL, 1, NULL );
+	xTaskCreate( vTask2_2, "Task 2", configMINIMAL_STACK_SIZE, NULL, 3, NULL );
+	xTaskCreate( vTask2_3, "Task 3", configMINIMAL_STACK_SIZE, NULL, 2, &xHandle );
     
 	vTaskStartScheduler();
 	for( ;; );
