@@ -20,9 +20,32 @@ void vApplicationIdleHook( void )
     usleep( 15000 );
 }
 
+// HW1_1의 Task 1 정의
+// void vTask1_1( void *pvParameters )
+// {
+// 	const char *pcTaskName = "Task 1: 1 sec period\r\n";
+
+// 	for ( ;; )
+// 	{
+// 		console_print( pcTaskName );
+// 		vTaskDelay( 1000 );
+// 	}
+// }
+// HW1_1의 Task 2 정의
+// void vTask1_2( void *pvParameters )
+// {
+// 	const char *pcTaskName = "Task 2: 2 sec period\r\n";
+
+// 	for ( ;; )
+// 	{
+// 		console_print( pcTaskName );
+// 		vTaskDelay( 2000 );
+// 	}
+// }
+
 TaskHandle_t xHandle;
 
-// Task 1 정의
+// HW1_2의 Task 1 정의
 void vTask2_1( void *pvParameters )
 {
 	const char *pcTaskName = "zzzzzzz\r\n";
@@ -33,7 +56,7 @@ void vTask2_1( void *pvParameters )
         vTaskDelay( 1000 );
 	}
 }
-// Task 2 정의
+// HW1_2의 Task 2 정의
 void vTask2_2( void *pvParameters )
 {
 	const char *pcTaskName = "알람! 알람! 알람!\r\n";
@@ -48,7 +71,7 @@ void vTask2_2( void *pvParameters )
 		//vTaskDelay( 1000 );
 	}
 }
-// Task 3 정의
+// HW1_2의 Task 3 정의
 void vTask2_3( void *pvParameters )
 {
 	const char *pcTaskName = "5분만..\r\n";
@@ -65,9 +88,11 @@ int main( void )
     console_init(); 
 
 	/* xTaskCreate(Pointer to the function that implement the task, text name, stack depth, task parameter, task priority, task handle)*/
-	xTaskCreate( vTask2_1, "Task 1", configMINIMAL_STACK_SIZE, NULL, 1, NULL );
-	xTaskCreate( vTask2_2, "Task 2", configMINIMAL_STACK_SIZE, NULL, 3, NULL );
-	xTaskCreate( vTask2_3, "Task 3", configMINIMAL_STACK_SIZE, NULL, 2, &xHandle );
+	// xTaskCreate( vTask1_1, "Task 1_1", configMINIMAL_STACK_SIZE, NULL, 0, NULL );
+	// xTaskCreate( vTask1_2, "Task 1_2", configMINIMAL_STACK_SIZE, NULL, 0, NULL );
+	xTaskCreate( vTask2_1, "Task 2_1", configMINIMAL_STACK_SIZE, NULL, 1, NULL );
+	xTaskCreate( vTask2_2, "Task 2_2", configMINIMAL_STACK_SIZE, NULL, 3, NULL );
+	xTaskCreate( vTask2_3, "Task 2_3", configMINIMAL_STACK_SIZE, NULL, 2, &xHandle );
     
 	vTaskStartScheduler();
 	for( ;; );
