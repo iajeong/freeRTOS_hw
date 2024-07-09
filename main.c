@@ -54,6 +54,7 @@ void vTask3( void *pvParameters )
 	for ( ;; )
 	{
 		console_print( pcTaskName );
+		vTaskDelay( 1000 );
 	}
 }
 
