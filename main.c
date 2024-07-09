@@ -28,7 +28,7 @@ void vTask1( void *pvParameters )
 	for( ;; )
 	{
 		console_print( pcTaskName );
-        vTaskDelay( 1000 );
+        vTaskDelay( 2000 );
 	}
 }
 // Task 2 정의
