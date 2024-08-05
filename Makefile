@@ -1,10 +1,10 @@
 CC                    := gcc
-BIN                   := study_freertos
+BIN                   := hw2_1
 
 BUILD_DIR             := ./build
 BUILD_DIR_ABS         := $(abspath $(BUILD_DIR))
 
-FREERTOS_DIR_REL      := /home/mmemcc/workspace/FreeRTOS/FreeRTOS
+FREERTOS_DIR_REL      := /home/ina/FreeRTOS/FreeRTOS
 FREERTOS_DIR          := $(abspath $(FREERTOS_DIR_REL))
 
 KERNEL_DIR            := ${FREERTOS_DIR}/Source
